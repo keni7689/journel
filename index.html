@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Self Mastery Journal</title>
+    <!-- Favicon / Bookmark Icons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/%3E%3Cpath d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/%3E%3Cpath d='M16 2v10l-3-3-3 3V2' fill='%23d4af37' stroke='none'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d4af37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/%3E%3Cpath d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/%3E%3Cpath d='M16 2v10l-3-3-3 3V2' fill='%23d4af37' stroke='none'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -164,6 +167,29 @@
             padding: var(--spacing-xl);
             border-bottom: 1px solid var(--color-border);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-icon-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent) 15%, transparent) 0%, color-mix(in srgb, var(--color-accent) 3%, transparent) 100%);
+            border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+            transition: var(--transition);
+        }
+
+        .logo:hover .logo-icon-container {
+            transform: scale(1.05) rotate(-3deg);
+            border-color: var(--color-accent);
+            box-shadow: 0 0 12px color-mix(in srgb, var(--color-accent) 20%, transparent);
         }
 
         .logo h1 {
@@ -917,7 +943,14 @@
         <!-- SIDEBAR -->
         <div class="sidebar" id="sidebar">
             <div class="logo">
-                <h1>⚔ Mastery</h1>
+                <div class="logo-icon-container">
+                    <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                        <path d="M16 2v10l-3-3-3 3V2" fill="currentColor" stroke="none"></path>
+                    </svg>
+                </div>
+                <h1>Mastery</h1>
                 <p>Journal & Discipline</p>
             </div>
 
@@ -978,8 +1011,15 @@
         <div class="main-content">
             <!-- HEADER -->
             <div class="header">
-                <div>
-                    <h2 id="page-title">Today's Journal</h2>
+                <div style="display: flex; align-items: center; gap: var(--spacing-sm);">
+                    <div class="header-logo" style="display: flex; align-items: center; justify-content: center; color: var(--color-accent); transition: var(--transition);">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            <path d="M16 2v10l-3-3-3 3V2" fill="currentColor" stroke="none"></path>
+                        </svg>
+                    </div>
+                    <h2 id="page-title" style="margin-left: var(--spacing-xs);">Today's Journal</h2>
                 </div>
                 <div style="display: flex; gap: var(--spacing-md); align-items: center;">
                     <button class="btn btn-secondary btn-icon" id="menu-toggle" onclick="app.toggleSidebar()" style="display: none;">
@@ -2228,5 +2268,5 @@
         // Initialize app
         const app = new JournalApp();
     </script>
-</head>
+</body>
 </html>
