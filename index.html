@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self Mastery Journal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #1a1a1a;
+            --color-secondary: #2a2a2a;
+            --color-tertiary: #3a3a3a;
+            --color-accent: #d4af37;
+            --color-accent-light: #e8c547;
+            --color-text-primary: #f5f5f5;
+            --color-text-secondary: #b0b0b0;
+            --color-border: #404040;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+            --color-calm: #3b82f6;
+            
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html.theme-midnight {
+            --color-primary: #0a0e27;
+            --color-secondary: #1a1f3a;
+            --color-tertiary: #2a2f4a;
+            --color-accent: #00d9ff;
+            --color-accent-light: #33e5ff;
+            --color-text-primary: #e8eef7;
+            --color-text-secondary: #9ca3af;
+        }
+
+        html.theme-minimal {
+            --color-primary: #fafafa;
+            --color-secondary: #f0f0f0;
+            --color-tertiary: #e5e5e5;
+            --color-accent: #000000;
+            --color-accent-light: #333333;
+            --color-text-primary: #1a1a1a;
+            --color-text-secondary: #666666;
+            --color-border: #d0d0d0;
+        }
+
+        html.theme-forest {
+            --color-primary: #0f2818;
+            --color-secondary: #1a4d2e;
+            --color-tertiary: #2d6a3e;
+            --color-accent: #4ade80;
+            --color-accent-light: #86efac;
+            --color-text-primary: #f0fdf4;
+            --color-text-secondary: #a7d8a3;
+        }
+
+        html.theme-ocean {
+            --color-primary: #0c1e2e;
+            --color-secondary: #164863;
+            --color-tertiary: #2a5f7f;
+            --color-accent: #38bdf8;
+            --color-accent-light: #7dd3fc;
+            --color-text-primary: #ecf0f1;
+            --color-text-secondary: #90caf9;
+        }
+
+        html.theme-paper {
+            --color-primary: #fef5e7;
+            --color-secondary: #f4e8d8;
+            --color-tertiary: #e8dcc4;
+            --color-accent: #8b7355;
+            --color-accent-light: #a68872;
+            --color-text-primary: #3e2723;
+            --color-text-secondary: #6d4c41;
+            --color-border: #d7ccc8;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--color-primary);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Crimson Text', serif;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 1.875rem; }
+        h3 { font-size: 1.25rem; }
+        h4 { font-size: 1.125rem; }
+
+        /* Layout */
+        .app-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            height: 100vh;
+            gap: 0;
+        }
+
+        .sidebar {
+            background-color: var(--color-secondary);
+            border-right: 1px solid var(--color-border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            position: relative;
+            z-index: 100;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: var(--color-secondary);
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--spacing-lg) var(--spacing-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .content-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-2xl);
+        }
+
+        /* Logo & Branding */
+        .logo {
+            padding: var(--spacing-xl);
+            border-bottom: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            letter-spacing: -1px;
+        }
+
+        .logo p {
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+            margin-top: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Navigation */
+        .nav-group {
+            padding: var(--spacing-lg) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-group:last-child {
+            border-bottom: none;
+        }
+
+        .nav-label {
+            padding: var(--spacing-md) var(--spacing-lg);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-secondary);
+            font-weight: 600;
+        }
+
+        .nav-item {
+            padding: var(--spacing-md) var(--spacing-lg);
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-size: 0.95rem;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            color: var(--color-text-primary);
+            background-color: var(--color-tertiary);
+        }
+
+        .nav-item.active {
+            color: var(--color-accent);
+            border-left-color: var(--color-accent);
+            background-color: var(--color-tertiary);
+        }
+
+        .nav-icon {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Cards & Sections */
+        .card {
+            background-color: var(--color-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-family: 'Crimson Text', serif;
+        }
+
+        /* Form Elements */
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: var(--spacing-md);
+            background-color: var(--color-tertiary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            color: var(--color-text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            margin-bottom: var(--spacing-md);
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            background-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: var(--color-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-accent-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-tertiary);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--color-border);
+            border-color: var(--color-accent);
+        }
+
+        .btn-sm {
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-size: 0.8rem;
+        }
+
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+        }
+
+        .btn-danger {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+        }
+
+        .btn-danger:hover {
+            background-color: rgba(239, 68, 68, 0.2);
+        }
+
+        /* Sections */
+        .question-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .question {
+            background-color: var(--color-tertiary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+            border-left: 3px solid var(--color-accent);
+        }
+
+        .question-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 600;
+        }
+
+        .question-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.125rem;
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-text-primary);
+        }
+
+        .question-input {
+            width: 100%;
+        }
+
+        /* Calendar */
+        .calendar-widget {
+            background-color: var(--color-tertiary);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            font-weight: 600;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .calendar-nav button {
+            background-color: var(--color-secondary);
+            border: 1px solid var(--color-border);
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--color-text-primary);
+        }
+
+        .calendar-nav button:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: var(--spacing-sm);
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            padding: var(--spacing-sm) 0;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 0.85rem;
+            background-color: var(--color-secondary);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+
+        .calendar-day:hover {
+            border-color: var(--color-accent);
+        }
+
+        .calendar-day.today {
+            background-color: var(--color-accent);
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .calendar-day.has-entry {
+            border-color: var(--color-accent);
+        }
+
+        .calendar-day.other-month {
+            color: var(--color-text-secondary);
+            opacity: 0.5;
+        }
+
+        /* Habit Tracker */
+        .habit-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            padding: var(--spacing-lg);
+            background-color: var(--color-tertiary);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-md);
+            transition: var(--transition);
+        }
+
+        .habit-item.completed {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid var(--color-success);
+        }
+
+        .habit-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .habit-item.completed .habit-checkbox {
+            background-color: var(--color-success);
+            border-color: var(--color-success);
+        }
+
+        .habit-checkbox:hover {
+            border-color: var(--color-accent);
+        }
+
+        .habit-name {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .habit-streak {
+            font-size: 0.85rem;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        /* Emotions */
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .emotion-btn {
+            padding: var(--spacing-lg);
+            border: 2px solid var(--color-border);
+            background-color: var(--color-tertiary);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .emotion-btn:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        .emotion-btn.selected {
+            background-color: var(--color-accent);
+            color: var(--color-primary);
+            border-color: var(--color-accent);
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--color-secondary);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid var(--color-border);
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-header {
+            margin-bottom: var(--spacing-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--color-accent);
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--color-secondary);
+            color: var(--color-text-primary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--color-accent);
+            box-shadow: var(--shadow-lg);
+            animation: slideInRight 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.success {
+            border-left-color: var(--color-success);
+        }
+
+        .toast.error {
+            border-left-color: var(--color-danger);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .stat-card {
+            background-color: var(--color-tertiary);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            border: 1px solid var(--color-border);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: var(--color-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--color-border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: var(--color-accent);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--color-text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .app-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: absolute;
+                left: -280px;
+                height: 100%;
+                width: 280px;
+                transition: var(--transition);
+                z-index: 999;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .content-area {
+                padding: var(--spacing-lg);
+            }
+
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+
+            .header {
+                height: 60px;
+                padding: var(--spacing-md) var(--spacing-lg);
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: var(--spacing-lg);
+            }
+
+            .emotion-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Streak Display */
+        .streak-container {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg);
+            background-color: rgba(212, 175, 55, 0.1);
+            border-radius: var(--radius-lg);
+            border-left: 3px solid var(--color-accent);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .streak-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-accent);
+        }
+
+        .streak-text {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Focus Indicator */
+        .no-zero-days {
+            padding: var(--spacing-lg);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-accent);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .consistency-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--color-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: var(--spacing-sm);
+        }
+
+        .consistency-fill {
+            height: 100%;
+            background-color: var(--color-success);
+            transition: width 0.5s ease;
+        }
+
+        /* Search */
+        .search-box {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .search-results {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+
+        .search-result-item {
+            padding: var(--spacing-lg);
+            background-color: var(--color-tertiary);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid var(--color-border);
+        }
+
+        .search-result-item:hover {
+            background-color: var(--color-secondary);
+            border-color: var(--color-accent);
+            transform: translateX(4px);
+        }
+
+        .search-result-date {
+            font-size: 0.8rem;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .search-result-preview {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        /* Toggle */
+        .toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background-color: var(--color-tertiary);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .toggle input[type="checkbox"]:checked + .toggle-switch {
+            background-color: var(--color-success);
+            border-color: var(--color-success);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .toggle input[type="checkbox"]:checked + .toggle-switch .toggle-slider {
+            left: 22px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- SIDEBAR -->
+        <div class="sidebar" id="sidebar">
+            <div class="logo">
+                <h1>⚔ Mastery</h1>
+                <p>Journal & Discipline</p>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-label">Main</div>
+                <div class="nav-item active" data-page="today" onclick="app.goToPage('today')">
+                    <div class="nav-icon">📝</div>
+                    <span>Today's Journal</span>
+                </div>
+                <div class="nav-item" data-page="calendar" onclick="app.goToPage('calendar')">
+                    <div class="nav-icon">📅</div>
+                    <span>Calendar</span>
+                </div>
+                <div class="nav-item" data-page="habits" onclick="app.goToPage('habits')">
+                    <div class="nav-icon">✓</div>
+                    <span>Habits</span>
+                </div>
+                <div class="nav-item" data-page="emotions" onclick="app.goToPage('emotions')">
+                    <div class="nav-icon">🎯</div>
+                    <span>Emotions</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-label">Reviews</div>
+                <div class="nav-item" data-page="weekly" onclick="app.goToPage('weekly')">
+                    <div class="nav-icon">📊</div>
+                    <span>Weekly Review</span>
+                </div>
+                <div class="nav-item" data-page="monthly" onclick="app.goToPage('monthly')">
+                    <div class="nav-icon">🎖</div>
+                    <span>Monthly Review</span>
+                </div>
+            </div>
+
+            <div class="nav-group">
+                <div class="nav-label">Tools</div>
+                <div class="nav-item" data-page="search" onclick="app.goToPage('search')">
+                    <div class="nav-icon">🔍</div>
+                    <span>Search</span>
+                </div>
+                <div class="nav-item" data-page="stats" onclick="app.goToPage('stats')">
+                    <div class="nav-icon">📈</div>
+                    <span>Statistics</span>
+                </div>
+            </div>
+
+            <div class="nav-group" style="margin-top: auto; padding-top: var(--spacing-lg);">
+                <div class="nav-label">Settings</div>
+                <div class="nav-item" onclick="app.openSettings()">
+                    <div class="nav-icon">⚙</div>
+                    <span>Settings</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- HEADER -->
+            <div class="header">
+                <div>
+                    <h2 id="page-title">Today's Journal</h2>
+                </div>
+                <div style="display: flex; gap: var(--spacing-md); align-items: center;">
+                    <button class="btn btn-secondary btn-icon" id="menu-toggle" onclick="app.toggleSidebar()" style="display: none;">
+                        ☰
+                    </button>
+                    <button class="btn btn-secondary btn-sm" onclick="app.openResetMode()">
+                        🧠 Reset Mind
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONTENT AREA -->
+            <div class="content-area">
+                <!-- TODAY'S JOURNAL PAGE -->
+                <div class="page active" id="page-today">
+                    <!-- Date Navigation -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xl);">
+                        <div>
+                            <button class="btn btn-secondary btn-sm" onclick="app.previousDay()" style="margin-right: var(--spacing-md);">← Previous</button>
+                            <button class="btn btn-secondary btn-sm" onclick="app.goToToday()">Today</button>
+                        </div>
+                        <div style="font-family: 'Crimson Text', serif; font-size: 1.1rem;">
+                            <input type="date" id="journal-date" onchange="app.loadJournalForDate(this.value)" style="margin-bottom: 0;">
+                        </div>
+                        <div>
+                            <button class="btn btn-secondary btn-sm" onclick="app.nextDay()">Next →</button>
+                        </div>
+                    </div>
+
+                    <!-- Daily Title -->
+                    <div class="card">
+                        <label>Day Title (Optional)</label>
+                        <input type="text" id="day-title" placeholder="What does this day mean to you?" onchange="app.saveCurrent()">
+                    </div>
+
+                    <!-- MORNING SECTION -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 style="color: var(--color-accent);">🌅 Morning Intention</h3>
+                            <span style="font-size: 0.8rem; color: var(--color-text-secondary);">Start Strong</span>
+                        </div>
+
+                        <div class="question-section">
+                            <div class="question">
+                                <div class="question-label">Identity Statement</div>
+                                <div class="question-text">Today I act like someone who…</div>
+                                <input type="text" class="question-input" id="morning-identity" placeholder="Define who you are today" onchange="app.saveCurrent()">
+                            </div>
+
+                            <div class="question">
+                                <div class="question-label">Intention</div>
+                                <div class="question-text">What are the 1–3 actions that would make today respectable?</div>
+                                <textarea class="question-input" id="morning-actions" onchange="app.saveCurrent()"></textarea>
+                            </div>
+
+                            <div class="question">
+                                <div class="question-label">Discipline</div>
+                                <div class="question-text">Where will I likely break discipline today?</div>
+                                <textarea class="question-input" id="morning-discipline" onchange="app.saveCurrent()"></textarea>
+                            </div>
+
+                            <div class="question">
+                                <div class="question-label">Resilience</div>
+                                <div class="question-text">When discomfort appears today, how will I respond instead of escape?</div>
+                                <textarea class="question-input" id="morning-resilience" onchange="app.saveCurrent()"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAILY TRACKER -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 style="color: var(--color-accent);">⚡ Daily Wins & Lessons</h3>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-label">Biggest Win</div>
+                            <input type="text" class="question-input" id="biggest-win" placeholder="What did you accomplish?" onchange="app.saveCurrent()">
+                        </div>
+
+                        <div class="question">
+                            <div class="question-label">Biggest Failure</div>
+                            <input type="text" class="question-input" id="biggest-failure" placeholder="What could you have done better?" onchange="app.saveCurrent()">
+                        </div>
+
+                        <div class="question">
+                            <div class="question-label">What Triggered You?</div>
+                            <input type="text" class="question-input" id="trigger" placeholder="What distraction or challenge appeared?" onchange="app.saveCurrent()">
+                        </div>
+                    </div>
+
+                    <!-- NIGHT SECTION -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 style="color: var(--color-accent);">🌙 Evening Reflection</h3>
+                            <span style="font-size: 0.8rem; color: var(--color-text-secondary);">Close Strong</span>
+                        </div>
+
+                        <div class="question-section">
+                            <div class="question">
+                                <div class="question-label">Standards</div>
+                                <div class="question-text">Did my actions match my standards today?</div>
+                                <textarea class="question-input" id="evening-standards" onchange="app.saveCurrent()"></textarea>
+                            </div>
+
+                            <div class="question">
+                                <div class="question-label">Emotional Awareness</div>
+                                <div class="question-text">Where did emotion control my behavior today?</div>
+                                <textarea class="question-input" id="evening-emotions" onchange="app.saveCurrent()"></textarea>
+                            </div>
+
+                            <div class="question">
+                                <div class="question-label">Tomorrow's Correction</div>
+                                <div class="question-text">What is one correction I will make tomorrow?</div>
+                                <textarea class="question-input" id="evening-correction" onchange="app.saveCurrent()"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FREE NOTES -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 style="color: var(--color-accent);">📓 Free Notes</h3>
+                        </div>
+
+                        <label style="margin-bottom: var(--spacing-lg);">Anything on your mind</label>
+                        <textarea id="free-notes" placeholder="Thoughts, ideas, reflections..." style="min-height: 150px;" onchange="app.saveCurrent()"></textarea>
+                        
+                        <div style="display: flex; gap: var(--spacing-md); margin-top: var(--spacing-lg);">
+                            <button class="btn btn-secondary btn-sm" onclick="app.toggleFavorite()">★ Favorite</button>
+                            <button class="btn btn-secondary btn-sm" onclick="app.printJournal()">🖨 Print</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALENDAR PAGE -->
+                <div class="page" id="page-calendar">
+                    <h2 style="margin-bottom: var(--spacing-lg);">📅 Journal Calendar</h2>
+                    <div class="card">
+                        <div id="calendar-widget"></div>
+                    </div>
+                    <div class="card" style="margin-top: var(--spacing-xl);">
+                        <h4 style="margin-bottom: var(--spacing-lg);">Recent Entries</h4>
+                        <div id="recent-entries"></div>
+                    </div>
+                </div>
+
+                <!-- HABITS PAGE -->
+                <div class="page" id="page-habits">
+                    <h2 style="margin-bottom: var(--spacing-lg);">✓ Daily Habits</h2>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Today's Discipline Checklist</h3>
+                            <span id="habit-completion" style="color: var(--color-accent); font-weight: 600;"></span>
+                        </div>
+
+                        <div id="habits-list"></div>
+
+                        <div class="no-zero-days" style="margin-top: var(--spacing-xl);">
+                            <div style="font-weight: 600; margin-bottom: var(--spacing-md);">🔥 No Zero Days Streak</div>
+                            <div id="no-zero-indicator" style="font-size: 2rem; color: var(--color-accent); margin-bottom: var(--spacing-md);">0 days</div>
+                            <div class="consistency-bar">
+                                <div class="consistency-fill" id="consistency-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EMOTIONS PAGE -->
+                <div class="page" id="page-emotions">
+                    <h2 style="margin-bottom: var(--spacing-lg);">🎯 Emotional Awareness</h2>
+                    
+                    <div class="card">
+                        <h3 style="margin-bottom: var(--spacing-lg);">How are you feeling today?</h3>
+                        <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg); font-size: 0.9rem;">Select all that apply</p>
+
+                        <div class="emotion-grid" id="emotions-grid"></div>
+
+                        <button class="btn btn-primary" onclick="app.saveEmotions()" style="width: 100%;">Save Emotions</button>
+                    </div>
+
+                    <div class="card" style="margin-top: var(--spacing-lg);">
+                        <h4 style="margin-bottom: var(--spacing-lg);">Emotion Patterns (Last 7 Days)</h4>
+                        <div id="emotion-patterns"></div>
+                    </div>
+                </div>
+
+                <!-- WEEKLY REVIEW PAGE -->
+                <div class="page" id="page-weekly">
+                    <h2 style="margin-bottom: var(--spacing-lg);">📊 Weekly Review</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="weekly-entries">0</div>
+                            <div class="stat-label">Entries</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="weekly-consistency">0%</div>
+                            <div class="stat-label">Consistency</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="weekly-respect-score">0</div>
+                            <div class="stat-label">Respect Score</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="question">
+                            <div class="question-label">Reflection</div>
+                            <div class="question-text">Where did I keep my standards?</div>
+                            <textarea class="question-input" id="weekly-q1" onchange="app.saveReview('weekly')"></textarea>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-label">Weakness</div>
+                            <div class="question-text">Where did I negotiate with weakness?</div>
+                            <textarea class="question-input" id="weekly-q2" onchange="app.saveReview('weekly')"></textarea>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-label">Time</div>
+                            <div class="question-text">What wasted the most time?</div>
+                            <textarea class="question-input" id="weekly-q3" onchange="app.saveReview('weekly')"></textarea>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-label">Progress</div>
+                            <div class="question-text">What created the most progress?</div>
+                            <textarea class="question-input" id="weekly-q4" onchange="app.saveReview('weekly')"></textarea>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-label">Emotions</div>
+                            <div class="question-text">What emotion controlled me most?</div>
+                            <textarea class="question-input" id="weekly-q5" onchange="app.saveReview('weekly')"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MONTHLY REVIEW PAGE -->
+                <div class="page" id="page-monthly">
+                    <h2 style="margin-bottom: var(--spacing-lg);">🎖 Monthly Review</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="monthly-entries">0</div>
+                            <div class="stat-label">Total Entries</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="monthly-respect-score">0</div>
+                            <div class="stat-label">Month Score</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="question">
+                            <div class="question-label">Trust</div>
+                            <div class="question-text">Do I trust myself more than last month?</div>
+                            <textarea class="question-input" id="monthly-q1" onchange="app.saveReview('monthly')"></textarea>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-label">Excuses</div>
+                            <div class="question-text">What excuses am I still protecting?</div>
+                            <textarea class="question-input" id="monthly-q2" onchange="app.saveReview('monthly')"></textarea>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-label">Patterns</div>
+                            <div class="question-text">What habits weaken me repeatedly?</div>
+                            <textarea class="question-input" id="monthly-q3" onchange="app.saveReview('monthly')"></textarea>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-label">Change</div>
+                            <div class="question-text">What must permanently change now?</div>
+                            <textarea class="question-input" id="monthly-q4" onchange="app.saveReview('monthly')"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEARCH PAGE -->
+                <div class="page" id="page-search">
+                    <h2 style="margin-bottom: var(--spacing-lg);">🔍 Search Journal</h2>
+                    
+                    <div class="card">
+                        <label>Search all entries</label>
+                        <input type="text" id="search-input" placeholder="Search by title, content, or date..." onkeyup="app.performSearch(this.value)" style="margin-bottom: var(--spacing-lg);">
+                        <div id="search-results" class="search-results"></div>
+                    </div>
+                </div>
+
+                <!-- STATS PAGE -->
+                <div class="page" id="page-stats">
+                    <h2 style="margin-bottom: var(--spacing-lg);">📈 Statistics & Insights</h2>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" id="stats-total-entries">0</div>
+                            <div class="stat-label">Total Entries</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="stats-current-streak">0</div>
+                            <div class="stat-label">Current Streak</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="stats-overall-score">0</div>
+                            <div class="stat-label">Overall Score</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="stats-compliance">0%</div>
+                            <div class="stat-label">Compliance</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: var(--spacing-lg);">Consistency Graph (Last 30 Days)</h3>
+                        <div id="consistency-graph"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: var(--spacing-lg);">Most Common Emotions</h3>
+                        <div id="emotion-stats"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Settings</h3>
+                <button class="modal-close" onclick="app.closeModal('settings-modal')">✕</button>
+            </div>
+
+            <div style="margin-bottom: var(--spacing-xl);">
+                <h4 style="margin-bottom: var(--spacing-lg);">Theme</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-md);">
+                    <button class="btn btn-secondary theme-btn" data-theme="stoic" onclick="app.setTheme('stoic')">Dark Stoic</button>
+                    <button class="btn btn-secondary theme-btn" data-theme="midnight" onclick="app.setTheme('midnight')">Midnight</button>
+                    <button class="btn btn-secondary theme-btn" data-theme="minimal" onclick="app.setTheme('minimal')">Minimal White</button>
+                    <button class="btn btn-secondary theme-btn" data-theme="forest" onclick="app.setTheme('forest')">Forest</button>
+                    <button class="btn btn-secondary theme-btn" data-theme="ocean" onclick="app.setTheme('ocean')">Ocean</button>
+                    <button class="btn btn-secondary theme-btn" data-theme="paper" onclick="app.setTheme('paper')">Paper</button>
+                </div>
+            </div>
+
+            <div style="margin-bottom: var(--spacing-xl);">
+                <h4 style="margin-bottom: var(--spacing-lg);">Data Management</h4>
+                <button class="btn btn-secondary" onclick="app.exportData()" style="width: 100%; margin-bottom: var(--spacing-md);">📥 Export as JSON</button>
+                <button class="btn btn-secondary" onclick="app.exportAsMarkdown()" style="width: 100%; margin-bottom: var(--spacing-md);">📄 Export as Markdown</button>
+                <button class="btn btn-secondary" onclick="app.importData()" style="width: 100%; margin-bottom: var(--spacing-md);">📤 Import Backup</button>
+            </div>
+
+            <div>
+                <h4 style="margin-bottom: var(--spacing-lg);">Danger Zone</h4>
+                <button class="btn btn-danger" onclick="app.clearAllData()" style="width: 100%;">⚠️ Clear All Data</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESET MIND MODAL -->
+    <div class="modal" id="reset-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🧠 Reset Your Mind</h3>
+                <button class="modal-close" onclick="app.closeModal('reset-modal')">✕</button>
+            </div>
+
+            <div id="reset-content"></div>
+
+            <button class="btn btn-primary" onclick="app.closeModal('reset-modal')" style="width: 100%; margin-top: var(--spacing-lg);">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // APP STATE MANAGER
+        // ============================================
+        class JournalApp {
+            constructor() {
+                this.currentDate = this.getToday();
+                this.currentPage = 'today';
+                this.emotions = ['Calm', 'Focused', 'Angry', 'Distracted', 'Anxious', 'Confident', 'Tired', 'Motivated', 'Hopeless', 'Disciplined'];
+                this.habits = [
+                    { id: 'sleep', name: 'Sleep target met', emoji: '😴' },
+                    { id: 'exercise', name: 'Exercise', emoji: '💪' },
+                    { id: 'deepwork', name: 'Deep work completed', emoji: '🎯' },
+                    { id: 'phone', name: 'Phone controlled', emoji: '📱' },
+                    { id: 'hardtask', name: 'Difficult task done first', emoji: '⚡' },
+                    { id: 'promises', name: 'Promises kept', emoji: '🤝' },
+                    { id: 'calm', name: 'Calm under stress', emoji: '🧘' }
+                ];
+                this.init();
+            }
+
+            init() {
+                // Load theme
+                const savedTheme = localStorage.getItem('selectedTheme') || 'stoic';
+                this.setTheme(savedTheme);
+                
+                // Load today's journal
+                this.loadJournal();
+                
+                // Setup date input
+                document.getElementById('journal-date').value = this.currentDate;
+                
+                // Render emotions grid
+                this.renderEmotionsGrid();
+                
+                // Render habits
+                this.renderHabits();
+                
+                // Render calendar
+                this.renderCalendar();
+                
+                // Update stats
+                this.updateAllStats();
+                
+                // Handle menu for mobile
+                if (window.innerWidth <= 768) {
+                    document.getElementById('menu-toggle').style.display = 'block';
+                }
+                
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth <= 768) {
+                        document.getElementById('menu-toggle').style.display = 'block';
+                    } else {
+                        document.getElementById('menu-toggle').style.display = 'none';
+                        document.getElementById('sidebar').classList.remove('open');
+                    }
+                });
+            }
+
+            getToday() {
+                const today = new Date();
+                return today.toISOString().split('T')[0];
+            }
+
+            getStorageKey(date = this.currentDate) {
+                return `journal_${date}`;
+            }
+
+            loadJournal() {
+                const data = this.getJournalData(this.currentDate);
+                
+                document.getElementById('day-title').value = data.title || '';
+                document.getElementById('morning-identity').value = data.morning?.identity || '';
+                document.getElementById('morning-actions').value = data.morning?.actions || '';
+                document.getElementById('morning-discipline').value = data.morning?.discipline || '';
+                document.getElementById('morning-resilience').value = data.morning?.resilience || '';
+                document.getElementById('biggest-win').value = data.daily?.win || '';
+                document.getElementById('biggest-failure').value = data.daily?.failure || '';
+                document.getElementById('trigger').value = data.daily?.trigger || '';
+                document.getElementById('evening-standards').value = data.evening?.standards || '';
+                document.getElementById('evening-emotions').value = data.evening?.emotions || '';
+                document.getElementById('evening-correction').value = data.evening?.correction || '';
+                document.getElementById('free-notes').value = data.notes || '';
+                
+                // Load habits for this date
+                const habitsData = data.habits || {};
+                this.habits.forEach(habit => {
+                    const checkbox = document.querySelector(`input[data-habit="${habit.id}"]`);
+                    if (checkbox) {
+                        checkbox.checked = habitsData[habit.id] || false;
+                    }
+                });
+                
+                // Load emotions for this date
+                const emotionsData = data.emotions || [];
+                document.querySelectorAll('.emotion-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                    if (emotionsData.includes(btn.textContent.split('\n')[0])) {
+                        btn.classList.add('selected');
+                    }
+                });
+
+                this.updateHabitCompletion();
+            }
+
+            loadJournalForDate(date) {
+                this.currentDate = date;
+                document.getElementById('journal-date').value = date;
+                this.loadJournal();
+                this.updateHabitCompletion();
+            }
+
+            getJournalData(date = this.currentDate) {
+                const key = this.getStorageKey(date);
+                const data = localStorage.getItem(key);
+                return data ? JSON.parse(data) : {};
+            }
+
+            saveCurrent() {
+                const data = {
+                    date: this.currentDate,
+                    title: document.getElementById('day-title').value,
+                    morning: {
+                        identity: document.getElementById('morning-identity').value,
+                        actions: document.getElementById('morning-actions').value,
+                        discipline: document.getElementById('morning-discipline').value,
+                        resilience: document.getElementById('morning-resilience').value
+                    },
+                    daily: {
+                        win: document.getElementById('biggest-win').value,
+                        failure: document.getElementById('biggest-failure').value,
+                        trigger: document.getElementById('trigger').value
+                    },
+                    evening: {
+                        standards: document.getElementById('evening-standards').value,
+                        emotions: document.getElementById('evening-emotions').value,
+                        correction: document.getElementById('evening-correction').value
+                    },
+                    notes: document.getElementById('free-notes').value,
+                    habits: this.getHabitsData(),
+                    emotions: this.getSelectedEmotions(),
+                    createdAt: new Date(this.currentDate).getTime()
+                };
+
+                localStorage.setItem(this.getStorageKey(this.currentDate), JSON.stringify(data));
+                this.showToast('Journal saved ✓', 'success');
+                this.renderCalendar();
+                this.updateAllStats();
+            }
+
+            previousDay() {
+                const date = new Date(this.currentDate);
+                date.setDate(date.getDate() - 1);
+                this.loadJournalForDate(date.toISOString().split('T')[0]);
+            }
+
+            nextDay() {
+                const date = new Date(this.currentDate);
+                date.setDate(date.getDate() + 1);
+                this.loadJournalForDate(date.toISOString().split('T')[0]);
+            }
+
+            goToToday() {
+                this.loadJournalForDate(this.getToday());
+            }
+
+            goToPage(page) {
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                // Show selected page
+                document.getElementById(`page-${page}`).classList.add('active');
+                
+                // Update nav
+                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+                document.querySelector(`[data-page="${page}"]`).classList.add('active');
+                
+                // Update title
+                const titles = {
+                    'today': "Today's Journal",
+                    'calendar': 'Calendar',
+                    'habits': 'Daily Habits',
+                    'emotions': 'Emotional Awareness',
+                    'weekly': 'Weekly Review',
+                    'monthly': 'Monthly Review',
+                    'search': 'Search Journal',
+                    'stats': 'Statistics'
+                };
+                document.getElementById('page-title').textContent = titles[page];
+                
+                this.currentPage = page;
+                
+                // Load page-specific data
+                if (page === 'weekly') this.loadWeeklyReview();
+                if (page === 'monthly') this.loadMonthlyReview();
+                if (page === 'stats') this.updateDetailedStats();
+                
+                // Close sidebar on mobile
+                if (window.innerWidth <= 768) {
+                    document.getElementById('sidebar').classList.remove('open');
+                }
+            }
+
+            // HABITS
+            renderHabits() {
+                const container = document.getElementById('habits-list');
+                container.innerHTML = this.habits.map((habit, index) => {
+                    const data = this.getJournalData(this.currentDate);
+                    const isChecked = data.habits?.[habit.id] || false;
+                    const streak = this.calculateHabitStreak(habit.id);
+                    
+                    return `
+                        <div class="habit-item ${isChecked ? 'completed' : ''}">
+                            <input 
+                                type="checkbox" 
+                                data-habit="${habit.id}"
+                                ${isChecked ? 'checked' : ''}
+                                onchange="app.updateHabits()"
+                            >
+                            <div class="habit-checkbox" onclick="this.previousElementSibling.click()">
+                                ${isChecked ? '✓' : ''}
+                            </div>
+                            <span class="habit-name">${habit.emoji} ${habit.name}</span>
+                            <span class="habit-streak">${streak} 🔥</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            getHabitsData() {
+                const habits = {};
+                this.habits.forEach(habit => {
+                    const checkbox = document.querySelector(`input[data-habit="${habit.id}"]`);
+                    habits[habit.id] = checkbox?.checked || false;
+                });
+                return habits;
+            }
+
+            updateHabits() {
+                this.renderHabits();
+                this.saveCurrent();
+                this.updateHabitCompletion();
+            }
+
+            updateHabitCompletion() {
+                const data = this.getJournalData(this.currentDate);
+                const habits = data.habits || {};
+                const completed = Object.values(habits).filter(h => h).length;
+                const total = this.habits.length;
+                const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+                
+                document.getElementById('habit-completion').textContent = `${completed}/${total} (${percentage}%)`;
+                document.getElementById('consistency-fill').style.width = `${percentage}%`;
+                
+                // Update no-zero-days
+                const streak = this.calculateNoZeroDaysStreak();
+                document.getElementById('no-zero-indicator').textContent = `${streak} days`;
+            }
+
+            calculateHabitStreak(habitId) {
+                let streak = 0;
+                const today = new Date(this.currentDate);
+                
+                for (let i = 0; i < 365; i++) {
+                    const dateStr = new Date(today.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                    const data = this.getJournalData(dateStr);
+                    
+                    if (data.habits?.[habitId]) {
+                        streak++;
+                    } else if (i > 0) {
+                        break;
+                    }
+                }
+                
+                return streak;
+            }
+
+            calculateNoZeroDaysStreak() {
+                let streak = 0;
+                const today = new Date(this.currentDate);
+                
+                for (let i = 0; i < 365; i++) {
+                    const dateStr = new Date(today.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                    const data = this.getJournalData(dateStr);
+                    const habits = data.habits || {};
+                    const hasAnyHabit = Object.values(habits).some(h => h);
+                    
+                    if (hasAnyHabit || (data.notes && data.notes.trim())) {
+                        streak++;
+                    } else if (i > 0) {
+                        break;
+                    }
+                }
+                
+                return streak;
+            }
+
+            // EMOTIONS
+            renderEmotionsGrid() {
+                const container = document.getElementById('emotions-grid');
+                const data = this.getJournalData(this.currentDate);
+                const selected = data.emotions || [];
+                
+                container.innerHTML = this.emotions.map(emotion => `
+                    <div class="emotion-btn ${selected.includes(emotion) ? 'selected' : ''}" onclick="app.toggleEmotion(this, '${emotion}')">
+                        ${emotion}
+                    </div>
+                `).join('');
+            }
+
+            toggleEmotion(element, emotion) {
+                element.classList.toggle('selected');
+            }
+
+            getSelectedEmotions() {
+                const selected = [];
+                document.querySelectorAll('.emotion-btn.selected').forEach(btn => {
+                    selected.push(btn.textContent);
+                });
+                return selected;
+            }
+
+            saveEmotions() {
+                this.saveCurrent();
+                this.showToast('Emotions saved ✓', 'success');
+            }
+
+            // CALENDAR
+            renderCalendar() {
+                const container = document.getElementById('calendar-widget');
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = today.getMonth();
+                
+                const firstDay = new Date(year, month, 1);
+                const lastDay = new Date(year, month + 1, 0);
+                const daysInMonth = lastDay.getDate();
+                const startingDayOfWeek = firstDay.getDay();
+                
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                                  'July', 'August', 'September', 'October', 'November', 'December'];
+                
+                let html = `
+                    <div class="calendar-header">
+                        <div>${monthNames[month]} ${year}</div>
+                        <div class="calendar-nav">
+                            <button onclick="app.previousMonth()">←</button>
+                            <button onclick="app.goToToday()">Today</button>
+                            <button onclick="app.nextMonth()">→</button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-day-header">Sun</div>
+                        <div class="calendar-day-header">Mon</div>
+                        <div class="calendar-day-header">Tue</div>
+                        <div class="calendar-day-header">Wed</div>
+                        <div class="calendar-day-header">Thu</div>
+                        <div class="calendar-day-header">Fri</div>
+                        <div class="calendar-day-header">Sat</div>
+                `;
+                
+                // Empty cells for days before month starts
+                for (let i = 0; i < startingDayOfWeek; i++) {
+                    html += '<div class="calendar-day other-month">-</div>';
+                }
+                
+                // Days of month
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const data = this.getJournalData(dateStr);
+                    const hasEntry = Object.keys(data).length > 1; // More than just createdAt
+                    const isToday = dateStr === this.getToday();
+                    
+                    let classes = 'calendar-day';
+                    if (isToday) classes += ' today';
+                    if (hasEntry) classes += ' has-entry';
+                    
+                    html += `<div class="${classes}" onclick="app.loadJournalForDate('${dateStr}')">${day}</div>`;
+                }
+                
+                html += '</div>';
+                container.innerHTML = html;
+                
+                // Render recent entries
+                this.renderRecentEntries();
+            }
+
+            previousMonth() {
+                // This would require date state, simplified version just reloads
+                this.renderCalendar();
+            }
+
+            nextMonth() {
+                this.renderCalendar();
+            }
+
+            renderRecentEntries() {
+                const container = document.getElementById('recent-entries');
+                const entries = [];
+                const today = new Date();
+                
+                for (let i = 0; i < 30; i++) {
+                    const dateStr = new Date(today.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                    const data = this.getJournalData(dateStr);
+                    if (data.notes || data.title) {
+                        entries.push({ date: dateStr, data });
+                    }
+                    if (entries.length >= 10) break;
+                }
+                
+                container.innerHTML = entries.map(entry => {
+                    const date = new Date(entry.date);
+                    const preview = entry.data.notes?.substring(0, 80) || entry.data.title || 'No content';
+                    return `
+                        <div class="search-result-item" onclick="app.loadJournalForDate('${entry.date}')">
+                            <div class="search-result-date">${date.toLocaleDateString()}</div>
+                            <div class="search-result-preview">${preview}...</div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // SEARCH
+            performSearch(query) {
+                const container = document.getElementById('search-results');
+                if (!query.trim()) {
+                    container.innerHTML = '';
+                    return;
+                }
+                
+                const results = [];
+                const today = new Date();
+                
+                // Search last 365 days
+                for (let i = 0; i < 365; i++) {
+                    const dateStr = new Date(today.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                    const data = this.getJournalData(dateStr);
+                    
+                    const searchText = JSON.stringify(data).toLowerCase();
+                    if (searchText.includes(query.toLowerCase())) {
+                        results.push({ date: dateStr, data });
+                    }
+                    
+                    if (results.length >= 20) break;
+                }
+                
+                container.innerHTML = results.map(result => {
+                    const date = new Date(result.date);
+                    const preview = result.data.notes?.substring(0, 80) || result.data.title || 'No content';
+                    return `
+                        <div class="search-result-item" onclick="app.loadJournalForDate('${result.date}')">
+                            <div class="search-result-date">${date.toLocaleDateString()}</div>
+                            <div class="search-result-preview">${preview}...</div>
+                        </div>
+                    `;
+                }).join('');
+                
+                if (results.length === 0) {
+                    container.innerHTML = '<div style="text-align: center; color: var(--color-text-secondary); padding: var(--spacing-xl);">No results found</div>';
+                }
+            }
+
+            // REVIEWS
+            loadWeeklyReview() {
+                const key = `weekly_${this.getWeekNumber()}`;
+                const data = JSON.parse(localStorage.getItem(key) || '{}');
+                
+                document.getElementById('weekly-q1').value = data.q1 || '';
+                document.getElementById('weekly-q2').value = data.q2 || '';
+                document.getElementById('weekly-q3').value = data.q3 || '';
+                document.getElementById('weekly-q4').value = data.q4 || '';
+                document.getElementById('weekly-q5').value = data.q5 || '';
+                
+                this.updateWeeklyStats();
+            }
+
+            loadMonthlyReview() {
+                const key = `monthly_${this.getMonthNumber()}`;
+                const data = JSON.parse(localStorage.getItem(key) || '{}');
+                
+                document.getElementById('monthly-q1').value = data.q1 || '';
+                document.getElementById('monthly-q2').value = data.q2 || '';
+                document.getElementById('monthly-q3').value = data.q3 || '';
+                document.getElementById('monthly-q4').value = data.q4 || '';
+                
+                this.updateMonthlyStats();
+            }
+
+            saveReview(type) {
+                const isWeekly = type === 'weekly';
+                const key = isWeekly ? `weekly_${this.getWeekNumber()}` : `monthly_${this.getMonthNumber()}`;
+                
+                const data = {
+                    q1: document.getElementById(`${type}-q1`).value,
+                    q2: document.getElementById(`${type}-q2`).value,
+                    q3: document.getElementById(`${type}-q3`).value,
+                    q4: document.getElementById(`${type}-q4`).value,
+                    ...(isWeekly ? { q5: document.getElementById('weekly-q5').value } : {})
+                };
+                
+                localStorage.setItem(key, JSON.stringify(data));
+                this.showToast('Review saved ✓', 'success');
+            }
+
+            getWeekNumber() {
+                const date = new Date(this.currentDate);
+                const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+                const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+                return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+            }
+
+            getMonthNumber() {
+                const date = new Date(this.currentDate);
+                return `${date.getFullYear()}-${date.getMonth()}`;
+            }
+
+            // STATS
+            updateAllStats() {
+                this.updateWeeklyStats();
+                this.updateMonthlyStats();
+            }
+
+            updateWeeklyStats() {
+                let entries = 0;
+                let totalScore = 0;
+                const daysWithEntry = 0;
+                const today = new Date();
+                
+                for (let i = 0; i < 7; i++) {
+                    const dateStr = new Date(today.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                    const data = this.getJournalData(dateStr);
+                    if (Object.keys(data).length > 1) {
+                        entries++;
+                        totalScore += this.calculateRespectScore(data);
+                    }
+                }
+                
+                document.getElementById('weekly-entries').textContent = entries;
+                document.getElementById('weekly-consistency').textContent = Math.round((entries / 7) * 100) + '%';
+                document.getElementById('weekly-respect-score').textContent = Math.round(totalScore / entries) || 0;
+            }
+
+            updateMonthlyStats() {
+                let entries = 0;
+                let totalScore = 0;
+                const today = new Date();
+                
+                for (let i = 0; i < 30; i++) {
+                    const dateStr = new Date(today.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                    const data = this.getJournalData(dateStr);
+                    if (Object.keys(data).length > 1) {
+                        entries++;
+                        totalScore += this.calculateRespectScore(data);
+                    }
+                }
+                
+                document.getElementById('monthly-entries').textContent = entries;
+                document.getElementById('monthly-respect-score').textContent = Math.round(totalScore / entries) || 0;
+            }
+
+            updateDetailedStats() {
+                let totalEntries = 0;
+                const today = new Date();
+                let totalScore = 0;
+                const consistencyData = [];
+                const emotionCounts = {};
+                
+                for (let i = 0; i < 365; i++) {
+                    const dateStr = new Date(today.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                    const data = this.getJournalData(dateStr);
+                    
+                    if (Object.keys(data).length > 1) {
+                        totalEntries++;
+                        const score = this.calculateRespectScore(data);
+                        totalScore += score;
+                        
+                        if (i < 30) {
+                            consistencyData.unshift({ date: dateStr, score: score ? 1 : 0 });
+                        }
+                        
+                        data.emotions?.forEach(emotion => {
+                            emotionCounts[emotion] = (emotionCounts[emotion] || 0) + 1;
+                        });
+                    }
+                }
+                
+                const streak = this.calculateNoZeroDaysStreak();
+                const avgScore = totalEntries > 0 ? Math.round(totalScore / totalEntries) : 0;
+                const compliance = Math.round((totalEntries / 30) * 100);
+                
+                document.getElementById('stats-total-entries').textContent = totalEntries;
+                document.getElementById('stats-current-streak').textContent = streak;
+                document.getElementById('stats-overall-score').textContent = avgScore;
+                document.getElementById('stats-compliance').textContent = compliance + '%';
+                
+                // Render consistency graph
+                const graphContainer = document.getElementById('consistency-graph');
+                graphContainer.innerHTML = '<div style="display: grid; grid-template-columns: repeat(30, 1fr); gap: 4px;">' +
+                    consistencyData.map(day => 
+                        `<div style="width: 100%; aspect-ratio: 1; background-color: ${day.score ? 'var(--color-success)' : 'var(--color-tertiary)'}; border-radius: 2px; cursor: pointer;" title="${day.date}"></div>`
+                    ).join('') +
+                    '</div>';
+                
+                // Render emotion stats
+                const emotionContainer = document.getElementById('emotion-stats');
+                const sortedEmotions = Object.entries(emotionCounts)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5);
+                
+                emotionContainer.innerHTML = sortedEmotions.map(([emotion, count]) => 
+                    `<div style="display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-md); background-color: var(--color-tertiary); border-radius: var(--radius-md); margin-bottom: var(--spacing-sm);">
+                        <span>${emotion}</span>
+                        <span style="color: var(--color-accent); font-weight: 600;">${count}</span>
+                    </div>`
+                ).join('') || '<div style="color: var(--color-text-secondary);">No emotion data yet</div>';
+            }
+
+            calculateRespectScore(data) {
+                let score = 0;
+                const maxScore = 100;
+                
+                // Journal completion
+                if (data.morning?.actions) score += 20;
+                if (data.evening?.standards) score += 20;
+                
+                // Habit completion
+                const habits = data.habits || {};
+                const completedHabits = Object.values(habits).filter(h => h).length;
+                score += (completedHabits / this.habits.length) * 30;
+                
+                // Emotional control
+                if (data.evening?.emotions) score += 15;
+                
+                // Consistency
+                if (data.notes) score += 15;
+                
+                return Math.min(score, maxScore);
+            }
+
+            // THEMES
+            setTheme(theme) {
+                document.documentElement.className = `theme-${theme}`;
+                localStorage.setItem('selectedTheme', theme);
+                
+                // Update button styles
+                document.querySelectorAll('.theme-btn').forEach(btn => {
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('btn-secondary');
+                });
+                
+                const activeBtn = document.querySelector(`.theme-btn[data-theme="${theme}"]`);
+                if (activeBtn) {
+                    activeBtn.classList.remove('btn-secondary');
+                    activeBtn.classList.add('btn-primary');
+                }
+            }
+
+            // RESET MIND
+            openResetMode() {
+                const emotions = this.getSelectedEmotions();
+                let content = '<div style="padding: var(--spacing-lg);">';
+                
+                const defaultQuestions = {
+                    'Angry': 'What response would make you respect yourself later?',
+                    'Distracted': 'What are you trying not to feel?',
+                    'Anxious': 'What is one small action you can control right now?',
+                    'Tired': 'Are you physically tired or avoiding discomfort?',
+                    'Hopeless': 'What is one thing that went right today?'
+                };
+                
+                if (emotions.length > 0) {
+                    content += '<h4 style="margin-bottom: var(--spacing-lg);">Based on your emotions:</h4>';
+                    emotions.forEach(emotion => {
+                        const q = defaultQuestions[emotion] || 'Take a breath. What matters right now?';
+                        content += `
+                            <div class="question" style="margin-bottom: var(--spacing-lg);">
+                                <div class="question-label">${emotion}</div>
+                                <div class="question-text">${q}</div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    content += `
+                        <div class="question" style="margin-bottom: var(--spacing-lg);">
+                            <div class="question-label">Right Now</div>
+                            <div class="question-text">What action would you respect yourself for taking?</div>
+                        </div>
+                        <div class="question" style="margin-bottom: var(--spacing-lg);">
+                            <div class="question-label">Perspective</div>
+                            <div class="question-text">Is this a real problem or a feeling I'm mistaking for a fact?</div>
+                        </div>
+                    `;
+                }
+                
+                content += '</div>';
+                document.getElementById('reset-content').innerHTML = content;
+                this.openModal('reset-modal');
+            }
+
+            // EXPORT/IMPORT
+            exportData() {
+                const data = {};
+                const today = new Date();
+                
+                for (let i = 0; i < 365; i++) {
+                    const dateStr = new Date(today.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                    const key = this.getStorageKey(dateStr);
+                    const value = localStorage.getItem(key);
+                    if (value) data[key] = JSON.parse(value);
+                }
+                
+                const element = document.createElement('a');
+                element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, null, 2)));
+                element.setAttribute('download', `journal_backup_${new Date().toISOString().split('T')[0]}.json`);
+                element.style.display = 'none';
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+                
+                this.showToast('Journal exported ✓', 'success');
+            }
+
+            exportAsMarkdown() {
+                const today = new Date();
+                let markdown = '# Self Mastery Journal Export\n\n';
+                markdown += `Exported: ${new Date().toLocaleString()}\n\n`;
+                
+                for (let i = 0; i < 365; i++) {
+                    const dateStr = new Date(today.getTime() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+                    const data = this.getJournalData(dateStr);
+                    
+                    if (Object.keys(data).length > 1) {
+                        const date = new Date(dateStr);
+                        markdown += `## ${date.toLocaleDateString()}\n\n`;
+                        
+                        if (data.title) markdown += `**Title:** ${data.title}\n\n`;
+                        if (data.morning?.actions) markdown += `### Morning\n${data.morning.actions}\n\n`;
+                        if (data.evening?.standards) markdown += `### Evening\n${data.evening.standards}\n\n`;
+                        if (data.notes) markdown += `### Notes\n${data.notes}\n\n`;
+                    }
+                }
+                
+                const element = document.createElement('a');
+                element.setAttribute('href', 'data:text/markdown;charset=utf-8,' + encodeURIComponent(markdown));
+                element.setAttribute('download', `journal_${new Date().toISOString().split('T')[0]}.md`);
+                element.style.display = 'none';
+                document.body.appendChild(element);
+                element.click();
+                document.body.removeChild(element);
+                
+                this.showToast('Journal exported as Markdown ✓', 'success');
+            }
+
+            importData() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                input.onchange = (e) => {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            Object.entries(data).forEach(([key, value]) => {
+                                localStorage.setItem(key, JSON.stringify(value));
+                            });
+                            this.showToast('Journal imported successfully ✓', 'success');
+                            this.loadJournal();
+                            this.renderCalendar();
+                        } catch (error) {
+                            this.showToast('Error importing file', 'error');
+                        }
+                    };
+                    reader.readAsText(file);
+                };
+                input.click();
+            }
+
+            clearAllData() {
+                if (confirm('Are you absolutely sure? This will delete ALL journal entries. This cannot be undone.')) {
+                    localStorage.clear();
+                    location.reload();
+                }
+            }
+
+            // UTILITIES
+            toggleFavorite() {
+                const key = `favorite_${this.currentDate}`;
+                const isFavorite = localStorage.getItem(key);
+                if (isFavorite) {
+                    localStorage.removeItem(key);
+                    this.showToast('Removed from favorites', 'success');
+                } else {
+                    localStorage.setItem(key, 'true');
+                    this.showToast('Added to favorites ★', 'success');
+                }
+            }
+
+            printJournal() {
+                const printWindow = window.open('', '', 'height=600,width=800');
+                const data = this.getJournalData(this.currentDate);
+                const date = new Date(this.currentDate).toLocaleDateString();
+                
+                let html = `
+                    <html><head><title>Journal - ${date}</title>
+                    <style>
+                        body { font-family: serif; line-height: 1.8; padding: 40px; max-width: 600px; margin: 0 auto; }
+                        h1 { border-bottom: 2px solid #000; padding-bottom: 10px; }
+                        h2 { margin-top: 30px; }
+                        .question { margin: 20px 0; }
+                        .q-label { font-weight: bold; color: #666; }
+                    </style></head><body>
+                    <h1>${data.title || date}</h1>
+                    <p>Date: ${date}</p>
+                `;
+                
+                if (data.morning?.actions) {
+                    html += `<h2>Morning Intentions</h2><div class="question"><p>${data.morning.actions.replace(/\n/g, '<br>')}</p></div>`;
+                }
+                
+                if (data.daily?.win) {
+                    html += `<h2>Wins & Lessons</h2><p><strong>Win:</strong> ${data.daily.win}</p>`;
+                }
+                
+                if (data.evening?.standards) {
+                    html += `<h2>Evening Reflection</h2><p>${data.evening.standards.replace(/\n/g, '<br>')}</p>`;
+                }
+                
+                if (data.notes) {
+                    html += `<h2>Notes</h2><p>${data.notes.replace(/\n/g, '<br>')}</p>`;
+                }
+                
+                html += '</body></html>';
+                
+                printWindow.document.write(html);
+                printWindow.document.close();
+                printWindow.print();
+            }
+
+            openSettings() {
+                const theme = localStorage.getItem('selectedTheme') || 'stoic';
+                document.querySelector(`.theme-btn[data-theme="${theme}"]`)?.click();
+                this.openModal('settings-modal');
+            }
+
+            openModal(modalId) {
+                document.getElementById(modalId).classList.add('active');
+            }
+
+            closeModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            }
+
+            toggleSidebar() {
+                document.getElementById('sidebar').classList.toggle('open');
+            }
+
+            showToast(message, type = 'success') {
+                const toast = document.createElement('div');
+                toast.className = `toast ${type}`;
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            }
+        }
+
+        // Initialize app
+        const app = new JournalApp();
+    </script>
+</head>
+</html>
